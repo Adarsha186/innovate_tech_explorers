@@ -7,32 +7,32 @@ import JobOpportunities from "./components/JobOpportunities";
 import ContactUs from "./components/ContactUs";
 import GetInTouch from "./components/GetInTouch";
 import "./index.css";
-import logo_s from './images/logo_small.jpeg'
+import logo_s from './images/logo_small.jpeg';
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
 
-  const activeLinkClass = "bg-white text-blue-600 px-3 py-2 rounded";
-  const inactiveLinkClass = "text-white hover:text-yellow-300";
+  const activeLinkClass = "bg-gray-800 text-white px-4 py-2 rounded-lg shadow-md transform transition duration-300";
+  const inactiveLinkClass = "text-gray-400 hover:text-white px-4 py-2";
 
   const getLinkClass = ({ isActive }) => (isActive ? activeLinkClass : inactiveLinkClass);
 
   const navItems = [
     { path: "/", label: "Home" },
     { path: "/about-us", label: "Who We Are" },
-    { path: "services", label: "What We Do" },
+    { path: "/services", label: "What We Do" },
     { path: "/job-opportunities", label: "Job Opportunities" },
     { path: "/contact-us", label: "Contact Us" },
     { path: "/get-in-touch", label: "Get In Touch" }
-  ];  
+  ];
 
   return (
     <Router>
-      <div className="App">
+      <div className="App bg-gray-900 text-gray-100 min-h-screen">
         {/* Header with Logo */}
-        <header className="bg-blue-600 p-4">
+        <header className="bg-gray-800 p-6 shadow-lg">
           <div className="container mx-auto flex justify-between items-center">
-            <img src={logo_s} alt="Innovative Tech Explorers Logo" className="w-25 h-10" />
+            <img src={logo_s} alt="Innovative Tech Explorers Logo" className="w-24 h-12 rounded-full" />
 
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -55,7 +55,7 @@ function App() {
             </button>
 
             {/* Links for large screens */}
-            <nav className="hidden md:flex space-x-6">
+            <nav className="hidden md:flex space-x-6 items-center">
               {navItems.map((item) => (
                 <NavLink
                   key={item.path}
@@ -65,19 +65,17 @@ function App() {
                   {item.label}
                 </NavLink>
               ))}
+              <input
+                type="search"
+                className="py-2 px-4 rounded-lg bg-gray-700 text-gray-100 placeholder-gray-400 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Search..."
+              />
             </nav>
-
-            {/* Search Bar for Large Screens */}
-            <input
-              type="search"
-              className="hidden md:block ml-6 py-1 px-2 rounded border-none w-48"
-              placeholder="Search..."
-            />
           </div>
 
           {/* Mobile Navigation */}
           {isOpen && (
-            <div className="md:hidden bg-blue-600">
+            <div className="md:hidden bg-gray-800">
               <nav className="flex flex-col items-start space-y-4 p-4">
                 {navItems.map((item) => (
                   <NavLink
@@ -104,8 +102,19 @@ function App() {
           <Route path="/get-in-touch" element={<GetInTouch />} />
         </Routes>
 
-        <footer className="bg-blue-600 text-white text-center p-4 mt-10">
-          <p>© 2024 Innovative Tech Explorers</p>
+        <footer className="bg-gray-800 text-gray-400 text-center py-6">
+          <p className="text-lg">© 2024 Innovative Tech Explorers</p>
+          <div className="flex justify-center mt-4 space-x-6">
+            <a href="https://facebook.com" target="_blank" rel="noreferrer">
+              <i className="fab fa-facebook text-xl"></i>
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noreferrer">
+              <i className="fab fa-twitter text-xl"></i>
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noreferrer">
+              <i className="fab fa-linkedin text-xl"></i>
+            </a>
+          </div>
         </footer>
       </div>
     </Router>
